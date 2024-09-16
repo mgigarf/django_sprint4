@@ -84,7 +84,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -92,6 +92,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_URL = '/static/'
 
@@ -101,6 +102,14 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'blog:index'
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+CSRF_FAILURE_VIEW = 'pages.views.forbidden'
