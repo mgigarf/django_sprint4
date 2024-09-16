@@ -1,8 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from blog.constants import TITLE_MAX_LENGTH
+
 User = get_user_model()
-TITLE_MAX_LENGTH = 256
 
 
 class PublishedCreatedModel(models.Model):
@@ -28,7 +29,7 @@ class Location(PublishedCreatedModel):
         verbose_name_plural = 'Местоположения'
 
     def __str__(self):
-        return self.name
+        return self.name[:20]
 
 
 class Category(PublishedCreatedModel):
@@ -49,7 +50,7 @@ class Category(PublishedCreatedModel):
         verbose_name_plural = 'Категории'
 
     def __str__(self):
-        return self.title
+        return self.title[:20]
 
 
 class Post(PublishedCreatedModel):
@@ -84,7 +85,7 @@ class Post(PublishedCreatedModel):
         default_related_name = 'posts'
 
     def __str__(self):
-        return self.title
+        return self.title[:20]
 
 
 class Comment(PublishedCreatedModel):
