@@ -7,16 +7,17 @@ from django.utils import timezone
 
 from blog.constants import NUMBER_OF_POSTS_ON_PAGE
 from blog.models import Category, Post, Comment
-from .forms import *
+from blog.forms import PostForm, CommentForm, UserForm
 
 def get_posts_query_set():
     return (
         (Post.objects
-        .select_related('category', 'location', 'author')
-        .filter(
+         .select_related('category', 'location', 'author')
+         .filter(
             is_published=True, category__is_published=True,
             pub_date__lte=timezone.now())
         ).annotate(comment_count=Count('blog_comments')).order_by('-pub_date'))
+
 
 def get_paginator(request, posts):
     page_number = request.GET.get('page')
