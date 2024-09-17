@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from blog.constants import TITLE_MAX_LENGTH
+from blog.constants import TITLE_MAX_LENGTH, PREVIEW_LIMIT
 
 User = get_user_model()
 
@@ -29,7 +29,7 @@ class Location(PublishedCreatedModel):
         verbose_name_plural = 'Местоположения'
 
     def __str__(self):
-        return self.name[:20]
+        return self.name[:PREVIEW_LIMIT]
 
 
 class Category(PublishedCreatedModel):
@@ -50,7 +50,7 @@ class Category(PublishedCreatedModel):
         verbose_name_plural = 'Категории'
 
     def __str__(self):
-        return self.title[:20]
+        return self.title[:PREVIEW_LIMIT]
 
 
 class Post(PublishedCreatedModel):
@@ -85,7 +85,7 @@ class Post(PublishedCreatedModel):
         default_related_name = 'posts'
 
     def __str__(self):
-        return self.title[:20]
+        return self.title[:PREVIEW_LIMIT]
 
 
 class Comment(PublishedCreatedModel):
@@ -108,4 +108,9 @@ class Comment(PublishedCreatedModel):
         verbose_name = 'комментарий'
         verbose_name_plural = 'Комментарии'
         ordering = ('created_at', )
-        default_related_name = 'blog_comments'
+        default_related_name = 'comments'
+
+    def __str__(self):
+        result_string = (f'Комментарий пользователя {self.author.username} '
+                         f'для поста {self.post.title[:PREVIEW_LIMIT]}')
+        return result_string

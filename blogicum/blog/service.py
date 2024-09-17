@@ -16,7 +16,7 @@ def get_posts_query_set(owner=None):
     return (Post.objects.select_related(
         'category', 'location', 'author'
     ).filter(**kwargs).annotate(
-        comment_count=Count('blog_comments')
+        comment_count=Count('comments')
     ).order_by('-pub_date'))
 
 

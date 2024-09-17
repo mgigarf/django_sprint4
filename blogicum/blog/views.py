@@ -17,7 +17,7 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if not post.author == request.user:
         post = get_object_or_404(get_posts_query_set(), id=post_id)
-    comment = post.blog_comments.select_related('author')
+    comment = post.comments.select_related('author')
     form = CommentForm()
     return render(
         request, 'blog/detail.html',
