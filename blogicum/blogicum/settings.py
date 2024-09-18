@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-n3z4&nr#(pv+wyxpo^_ofu8vqjb+buyj#q3g0q%&4hu(0f^2w)'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -104,6 +104,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'blog:index'
+
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'www.gigarf2.pythonanywhere.com',
+    'gigarf2.pythonanywhere.com',
+]
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
