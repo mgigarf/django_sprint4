@@ -2,9 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 
-from blog.forms import CommentForm, PostForm, UserForm
-from blog.models import Category, Comment, Post
-from blog.service import authorize, get_paginator, get_posts_query_set
+from .forms import CommentForm, PostForm, UserForm
+from .models import Category, Comment, Post
+from .service import authorize, get_paginator, get_posts_query_set
 
 
 def index(request):
@@ -14,7 +14,7 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    post = get_object_or_404(Post.objects, id=post_id)
     if not post.author == request.user:
         post = get_object_or_404(get_posts_query_set(), id=post_id)
     comment = post.comments.select_related('author')
@@ -48,8 +48,8 @@ def create_post(request):
 @login_required
 @authorize
 def edit_post(request, post_id):
-    instance = get_object_or_404(Post, id=post_id)
-    form = PostForm(request.POST or None, instance=instance)
+    post = get_object_or_404(Post, id=post_id)
+    form = PostForm(request.POST or None, instance=post)
     if form.is_valid():
         form.save()
         return redirect('blog:post_detail', post_id=post_id)

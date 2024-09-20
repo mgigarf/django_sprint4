@@ -7,8 +7,6 @@ SECRET_KEY = 'django-insecure-n3z4&nr#(pv+wyxpo^_ofu8vqjb+buyj#q3g0q%&4hu(0f^2w)
 
 DEBUG = False
 
-ALLOWED_HOSTS = []
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -17,7 +15,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
     'django_bootstrap5',
 
     'blog.apps.BlogConfig',
@@ -32,7 +29,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'blogicum.urls'

@@ -3,8 +3,8 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 
-from blog.constants import NUMBER_OF_POSTS_ON_PAGE
-from blog.models import Comment, Post
+from .constants import NUMBER_OF_POSTS_ON_PAGE
+from .models import Comment, Post
 
 
 def get_posts_query_set(owner=None):
